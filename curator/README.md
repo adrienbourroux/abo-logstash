@@ -32,10 +32,11 @@ Already integrated in `abo-logstash`:
    make deploy SERVICE=abo-logstash SCALINGO_REGION=osc-fr1
    ```
 
-3. **Configure Scheduler** (Scalingo dashboard):
-   - Add scheduler that runs daily at 03:00 and 15:00 UTC
+3. **Scheduler**:
+   - Automatically enabled by the root `cron.json` file during deployment
+   - Runs daily at 03:00 and 15:00 UTC
    - Command: `bash /app/curator/bin/start.sh`
 
 ## Scheduler
 
-Runs via Scalingo Scheduler to clean old log indices matching the configured prefix and retention period.
+Runs via Scalingo Scheduler configured in the root `cron.json` file to clean old log indices matching the configured prefix and retention period.

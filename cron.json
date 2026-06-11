@@ -1,0 +1,8 @@
+{
+  "jobs": [
+    {
+      "command": "0 3,15 * * * bash /app/curator/bin/start.sh",
+      "size": "M"
+    }
+  ]
+}

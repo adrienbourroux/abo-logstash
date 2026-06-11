@@ -1,0 +1,11 @@
+---
+client:
+  hosts:
+    - ${SCALINGO_ELASTICSEARCH_HOST}:${SCALINGO_ELASTICSEARCH_PORT}
+      username: ${SCALINGO_ELASTICSEARCH_USER}
+      password: ${SCALINGO_ELASTICSEARCH_PASSWORD}
+
+logging:
+  loglevel: INFO
+  logfile:
+  logformat: default

@@ -30,9 +30,12 @@ cat > "$CURATOR_HOME/curator.yml" <<EOF
 ---
 client:
   hosts:
-    - $ELASTICSEARCH_HOST:$ELASTICSEARCH_PORT
-      username: $ELASTICSEARCH_USER
-      password: $ELASTICSEARCH_PASSWORD
+    - $ELASTICSEARCH_HOST
+  port: $ELASTICSEARCH_PORT
+  http_auth: $ELASTICSEARCH_USER:$ELASTICSEARCH_PASSWORD
+  use_ssl: False
+  ssl_no_validate: True
+  timeout: 30
 
 logging:
   loglevel: INFO

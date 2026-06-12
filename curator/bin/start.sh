@@ -1,9 +1,16 @@
 #!/bin/bash
 set -e
 
-CURATOR_HOME="${CURATOR_HOME:-.}"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CURATOR_HOME="${CURATOR_HOME:-$SCRIPT_DIR/..}"
 LOGS_RETENTION_DAYS="${LOGS_RETENTION_DAYS:-10}"
 LOGS_INDICES_PREFIX="${LOGS_INDICES_PREFIX:-logs-}"
+CURATOR_BIN="${CURATOR_BIN:-$(command -v curator || command -v curator_cli || true)}"
+
+if [ -z "$CURATOR_BIN" ]; then
+  echo "Error: curator executable not found in PATH"
+  exit 1
+fi
 
 # Parse SCALINGO_ELASTICSEARCH_URL if available
 if [ -n "$SCALINGO_ELASTICSEARCH_URL" ]; then
@@ -65,4 +72,4 @@ actions:
 EOF
 
 echo "Running Curator cleanup..."
-exec curator --config "$CURATOR_HOME/curator.yml" "$CURATOR_HOME/log-clean.yml"
+exec "$CURATOR_BIN" --config "$CURATOR_HOME/curator.yml" "$CURATOR_HOME/log-clean.yml"
